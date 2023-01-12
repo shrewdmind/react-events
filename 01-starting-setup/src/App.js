@@ -1,12 +1,14 @@
 import { Expenses } from "./components/Expenses/Expenses.jsx";
 import Items from "./components/Expenses/Expense.js";
+import NewExpense from './components/NewExpense/NewExpense.js';
+import NewExpenses from "./components/NewExpense/NewExpenses.jsx";
 
 
 function App() {
 
   return (
     <div>
-      <h1>Let's get started!</h1>
+      <NewExpenses Items={NewExpense} />
       <Expenses Items={Items} />
     </div>
   );
