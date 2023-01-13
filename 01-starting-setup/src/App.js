@@ -1,15 +1,23 @@
 import { Expenses } from "./components/Expenses/Expenses.jsx";
 import Items from "./components/Expenses/Expense.js";
-import NewExpense from './components/NewExpense/NewExpense.js';
 import NewExpenses from "./components/NewExpense/NewExpenses.jsx";
+import { useState } from 'react'
 
 
 function App() {
 
+  const [expenses, setExpenses] = useState(Items);
+
+  const setExpenseHandler = (expense) => {
+    setExpenses((exp) => {
+      return [expense, ...exp];
+    });
+  }
+
   return (
     <div>
-      <NewExpenses Items={NewExpense} />
-      <Expenses Items={Items} />
+      <NewExpenses onAddExpense={setExpenseHandler} />
+      <Expenses Items={expenses} />
     </div>
   );
 }

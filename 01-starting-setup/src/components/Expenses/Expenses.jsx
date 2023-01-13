@@ -1,25 +1,33 @@
-import ExpenseItem from "./ExpenseItem";
+import ExpenseList from "./ExpenseList";
 import "./Expenses.css";
 import Card from "../UI/Card"
+import ExpenseFilter from "./ExpenseFilter";
+import { useState } from 'react';
+import ExpensesChart from "./ExpensesChart";
 
 export function Expenses(props) {
+    const [filteredYear, setFilteredYear] = useState('2021');
+
+    const filterChangeHandler = selectedYear => {
+      setFilteredYear(selectedYear);
+    };
+
+    const filterExpense = props.Items.filter((expense) => {
+        return expense.date.getFullYear().toString() === filteredYear 
+    });
+  
     return (
-        <Card className="expenses">
-            <ExpenseItem 
-                title={props.Items[0].title}
-                amount={props.Items[0].amount}
-                date={props.Items[0].date}
-            />
-            <ExpenseItem 
-                title={props.Items[1].title}
-                amount={props.Items[1].amount}
-                date={props.Items[1].date}
-            />
-            <ExpenseItem 
-                title={props.Items[2].title}
-                amount={props.Items[2].amount}
-                date={props.Items[2].date}
-            />
-        </Card>
+        <div>
+            <Card className='expenses'>
+                <ExpenseFilter 
+                    selected={filteredYear} 
+                    onChangeFilter={filterChangeHandler} 
+                />
+                <ExpensesChart expenses={filterExpense}/>
+                <ExpenseList 
+                    items={filterExpense} 
+                />
+            </Card>
+        </div>
     )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 }
